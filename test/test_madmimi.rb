@@ -59,5 +59,12 @@ class TestMadmimi < Test::Unit::TestCase
       response = @mimi.status(1234)
       assert_equal "sent", response
     end
+
+    should "accept hash as parameters for add_to_list method" do
+      stub_post("/audience_lists/#{URI.escape('Death Star newsletter')}/add", {:body => 'new user params'})
+      params = {:email => 'darth@vader.com', :list_name => 'Death Star newsletter', :first_name => 'Darth', :last_name => 'Vader'}
+      response = @mimi.add_to_list(params)
+      assert_equal 'new user params', response
+    end
   end
 end
