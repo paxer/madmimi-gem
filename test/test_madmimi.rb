@@ -66,5 +66,11 @@ class TestMadmimi < Test::Unit::TestCase
       response = @mimi.add_to_list(params)
       assert_equal 'new user params', response
     end
+
+    should "get a suppressed status" do
+      stub_get("/audience_members/#{URI.escape('darth@vader.com')}/is_suppressed", { :https => true, :body => "sent" })
+      response = @mimi.suppressed?('darth@vader.com')
+      assert_equal false, response
+    end
   end
 end
