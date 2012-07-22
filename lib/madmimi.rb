@@ -119,6 +119,10 @@ class MadMimi
     do_request(SUPPRESS_USER_PATH.gsub('%email%', email), :post)
   end
 
+  def unsuppress_email(email)
+    csv_import("email,opt_out\n#{email},0")
+  end
+
   def suppressed?(email)
     response = do_request(IS_SUPPRESSED_PATH.gsub('%email%', email), :get)
     response == 'true' ? true : false

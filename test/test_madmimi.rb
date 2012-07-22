@@ -72,5 +72,10 @@ class TestMadmimi < Test::Unit::TestCase
       response = @mimi.suppressed?('darth@vader.com')
       assert_equal false, response
     end
+
+    should "unsuppress email" do
+      response = @mimi.unsuppress_email('darth@vader.com').inspect
+      flunk "email is unsuppressed" unless response.kind_of?(Hash) || !response.empty?
+    end
   end
 end
