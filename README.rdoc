@@ -31,6 +31,8 @@ mimi.remove_from_list('dave@example.com', 'Test List') -> remove this email addr
 
 mimi.suppressed_since('unix timestamp') -> get a TXT of all addresses that were suppressed since this timestamp
 
+mimi.suppressed?('darth@vader.com') -> get true or false depending from email status
+
 === Promotions
 
 mimi.promotions -> returns a hash of your promotions
