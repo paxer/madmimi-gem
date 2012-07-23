@@ -27,7 +27,11 @@ mimi.csv_import("name,email\ndave,dave@example.com\n") -> import from a csv stri
 
 mimi.add_to_list({:email => 'dave@example.com', :list_name => 'Test List', :first_name => 'Dave', :last_name => 'Smith'}) -> add this email address, first and last names to a specific list
 
+mimi.add_to_list!({:email => 'dave@example.com', :list_name => 'Test List', :first_name => 'Dave', :last_name => 'Smith'}) -> add this email address, first and last names to a specific list and unsuppress it if it was in suppressed list
+
 mimi.remove_from_list('dave@example.com', 'Test List') -> remove this email address from a specific list
+
+mimi.remove_from_list!('dave@example.com', 'Test List') -> remove this email address from a specific list and move it to suppressed if email does not belong to any lists
 
 mimi.suppressed_since('unix timestamp') -> get a TXT of all addresses that were suppressed since this timestamp
 

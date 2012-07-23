@@ -107,8 +107,25 @@ class MadMimi
                { :email=> options[:email], :first_name => options[:first_name], :last_name => options[:last_name] })
   end
 
+  def add_to_list!(options)
+    unsuppress_email(options[:email]) if suppressed?(options[:email])
+    add_to_list(options)
+  end
+
   def remove_from_list(email, list_name)
     do_request("#{NEW_LISTS_PATH}/#{URI.escape(list_name)}/remove", :post, :email => email)
+  end
+
+  def remove_from_list!(email, list_name)
+    search_results = audience_search(email)
+    if search_results["audience"]
+      subscribed_to_lists = search_results["audience"]["member"]["lists"]["list"]
+      if subscribed_to_lists.kind_of?(Array) && subscribed_to_lists.count > 1
+        remove_from_list(email, list_name)
+      else
+        suppress_email(email)
+      end
+    end
   end
 
   def suppressed_since(timestamp)

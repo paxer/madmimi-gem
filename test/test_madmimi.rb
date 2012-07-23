@@ -74,8 +74,15 @@ class TestMadmimi < Test::Unit::TestCase
     end
 
     should "unsuppress email" do
-      response = @mimi.unsuppress_email('darth@vader.com').inspect
-      flunk "email is unsuppressed" unless response.kind_of?(Hash) || !response.empty?
+      response = @mimi.unsuppress_email('darth@vader.com')
+      flunk "email is not unsuppressed" unless response.kind_of?(Hash) || !response.empty?
+    end
+
+    should "unsuppress email while add_to_list if it was suppressed" do
+      stub_post("/audience_lists/#{URI.escape('Death Star newsletter')}/add", {:body => 'new user params'})
+      params = {:email => 'darth@vader.com', :list_name => 'Death Star newsletter', :first_name => 'Darth', :last_name => 'Vader'}
+      response = @mimi.add_to_list!(params)
+      assert_equal 'new user params', response
     end
   end
 end
