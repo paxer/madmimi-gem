@@ -33,6 +33,10 @@ mimi.suppressed_since('unix timestamp') -> get a TXT of all addresses that were 
 
 mimi.suppressed?('darth@vader.com') -> get true or false depending from email status
 
+mimi.suppress_email('darth@vader.com') -> move email to suppressed list
+
+mimi.unsuppress_email('darth@vader.com') -> move email from suppressed list
+
 === Promotions
 
 mimi.promotions -> returns a hash of your promotions
