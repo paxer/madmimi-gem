@@ -258,7 +258,7 @@ class MadMimi
           req = Net::HTTP::Get.new(path)
           req.set_form_data(form_data)
           response = http.request(req)
-          resp = response.body.strip
+          resp = response.body ? response.body.strip : ''
         end
         resp
       rescue SocketError
@@ -270,7 +270,7 @@ class MadMimi
           req = Net::HTTP::Post.new(path)
           req.set_form_data(form_data)
           response = http.request(req)
-          resp = response.body.strip
+          resp = response.body ? response.body.strip : ''
         end
       rescue SocketError
         raise "Host unreachable."
